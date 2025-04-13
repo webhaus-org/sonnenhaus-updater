@@ -41,7 +41,7 @@ def create_falcon_app(cfg: config.Config):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--port", type=int, default=6543)
+    parser.add_argument("--port", type=int, default=6643)
     parser.add_argument("--workers", type=int, default=1)
     parser.add_argument("--productive", type=bool, default=False)
     parser.add_argument("--cfg", default=None)
