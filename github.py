@@ -46,7 +46,7 @@ class GithubRoutes:
             )
         subprocess.Popen(
             [
-                service_cfg.update_script_path,
+                service_cfg.path_to_update_script,
                 service_cfg.path_to_repo,
                 service_cfg.branch,
                 service_cfg.service_name,

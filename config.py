@@ -7,6 +7,7 @@ import yaml
 class Repo:
     service_name: str
     path_to_repo: str
+    path_to_update_script: str
     gh_secret: str
     branch: str
 
