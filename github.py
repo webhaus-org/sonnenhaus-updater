@@ -36,7 +36,7 @@ class GithubRoutes:
         with req.bounded_stream as rs:
             raw_body = rs.read()
         digest = hmac.new(
-            key=service_cfg.gh_secret, msg=raw_body, digestmod=hashlib.sha256
+            key=service_cfg.gh_secret.encode("utf-8"), msg=raw_body, digestmod=hashlib.sha256
         )
         expected_signature = f"sha256={digest.hexdigest()}"
         if not hmac.compare_digest(expected_signature, hub_signature):
