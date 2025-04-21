@@ -8,6 +8,7 @@ class Repo:
     service_name: str
     path_to_update_script: str
     gh_secret: str
+    action: str
     args: list[str]
 
 

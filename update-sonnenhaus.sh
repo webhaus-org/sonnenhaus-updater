@@ -1,16 +1,19 @@
 #! /usr/bin/env bash
 
 # usage:
-# update_api.sh <path_to_local_repo> <branch_name> <path_to_env> <path_to_firebase-config> <out_dir>
+# update_api.sh <payload> <release_versions_folder> <path_to_firebease_cfg> <path_to_delivery>
 
 set -euo pipefail
 
-git \
-  -C "${1}" \
-  pull origin "${2}" --rebase
+release_url="$("${1}" | jq -r ".release.url")"
+release_id="$("${1}" | jq -r ".release.id")"
+target_dir="${2}/${release_id}"
+content_dir="${target_dir}/dist"
+download_url="$(curl "${release_url}" | jq -r ".assets[0].browser_download_url")"
 
-npm --prefix "${1}" install "${1}"
-ln -sf "${3}" "${1}"/.env #env
-ln -sf "${4}" "${1}"/src/firebase_config.json #firebase_config
+curl "${download_url}" -L --output "${2}/release.tar"
+mkdir "${target_dir}"
+tar -xf "${2}/release.tar" -C "${target_dir}"
 
-vite build "${1}" --outDir "${5}" --mode production
+ln -sf "${3}" "${content_dir}/assets/firebase_cfg.json"
+ln -sf "${content_dir}" "${4}"

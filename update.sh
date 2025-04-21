@@ -1,12 +1,12 @@
 #! /usr/bin/env bash
 
 # usage:
-# update_api.sh <path_to_local_api_repo> <branch_name> <systemd-unit-name>
+# update_api.sh <payload> <path_to_local_api_repo> <branch_name> <systemd-unit-name>
 
 set -euo pipefail
 
 git \
-  -C "${1}" \
-  pull origin "${2}" --rebase
+  -C "${2}" \
+  pull origin "${3}" --rebase
 
-sudo systemctl restart "${3}"
+sudo systemctl restart "${4}"
