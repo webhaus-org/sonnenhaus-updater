@@ -46,10 +46,10 @@ class GithubRoutes:
                 title="Signature unmatched",
                 description="Calculated and provided signature didn't match",
             )
-        payload = json.load(raw_body)
+        payload = json.loads(raw_body)
         action = service_cfg.action
 
-        if payload["action"] != action:
+        if "action" in payload and payload["action"] != action:
             return falcon.HTTPNotImplemented(
                 title="Action not implemented",
                 description=f"{payload['action']} not implemented. Implemented {action=}",
@@ -57,7 +57,7 @@ class GithubRoutes:
         subprocess.Popen(
             [
                 service_cfg.path_to_update_script,
-                payload,
+                json.dumps(payload),
                 *service_cfg.args,
             ]
         )
