@@ -5,8 +5,8 @@
 
 set -euo pipefail
 
-release_url="$("${1}" | jq -r ".release.url")"
-release_id="$("${1}" | jq -r ".release.id")"
+release_url="$(echo "${1}" | jq -r ".release.url")"
+release_id="$(echo "${1}" | jq -r ".release.id")"
 target_dir="${2}/${release_id}"
 content_dir="${target_dir}/dist"
 download_url="$(curl "${release_url}" | jq -r ".assets[0].browser_download_url")"
