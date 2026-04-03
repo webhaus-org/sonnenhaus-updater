@@ -2,5 +2,5 @@ bjoern==3.2.2
 cryptography==46.0.6
 dacite==1.9.2
 falcon==4.2.0
-werkzeug==3.1.6
+werkzeug==3.1.8
 PyYaml==6.0.3
